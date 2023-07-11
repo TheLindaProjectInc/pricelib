@@ -2,7 +2,7 @@
 
 # pricelib
 
-metrilib is a library for fetching the MRX to USD price based on the MNS MRXtoUSDOracle.
+pricelib is a library for fetching the MRX to USD price based on the MNS MRXtoUSDOracle.
 
 ### [**Documentation**](https://thelindaprojectinc.github.io/pricelib/modules.html)
 
