@@ -1,7 +1,7 @@
-import {MetrixContract, Provider, Transaction} from '@metrixcoin/metrilib';
+import { MetrixContract, Provider, Transaction } from "@metrixcoin/metrilib";
 
-import {MRXtoUSDOracle as ABI} from './abi/MRXtoUSDOracle';
-import {ZeroAddress} from 'ethers';
+import { MRXtoUSDOracle as ABI } from "./abi/MRXtoUSDOracle";
+import { ZeroAddress } from "ethers";
 
 export default class MRXtoUSDOracle extends MetrixContract {
   constructor(address: string, provider: Provider) {
@@ -14,8 +14,8 @@ export default class MRXtoUSDOracle extends MetrixContract {
    * @returns {Promise<boolean>} whether the address is a controller
    */
   async controllers(address: string): Promise<boolean> {
-    const isController = await this.call('controllers(address)', [address]);
-    return isController && isController.toString() === 'true' ? true : false;
+    const isController = await this.call("controllers(address)", [address]);
+    return isController && isController.toString() === "true" ? true : false;
   }
 
   /**
@@ -23,7 +23,7 @@ export default class MRXtoUSDOracle extends MetrixContract {
    * @returns {Promise<bigint>} the price in MRX satoshi per USD
    */
   async lastUpdate(): Promise<bigint> {
-    const lastUpdate = await this.call('lastUpdate()', []);
+    const lastUpdate = await this.call("lastUpdate()", []);
     return lastUpdate ? BigInt(lastUpdate.toString()) : BigInt(0);
   }
 
@@ -32,7 +32,7 @@ export default class MRXtoUSDOracle extends MetrixContract {
    * @returns {Promise<string>} the EVM style address of the owner of this contract
    */
   async owner(): Promise<string> {
-    const o = await this.call('owner()', []);
+    const o = await this.call("owner()", []);
     return o ? o.toString() : ZeroAddress;
   }
 
@@ -44,12 +44,12 @@ export default class MRXtoUSDOracle extends MetrixContract {
    * @returns {Promise<bigint>} the price in MRX satoshi of the name
    */
   async price(name: string, expiry: bigint, duration: bigint): Promise<bigint> {
-    const p = await this.call('price(string,uint256,uint256)', [
+    const p = await this.call("price(string,uint256,uint256)", [
       name,
       `0x${expiry.toString(16)}`,
       `0x${duration.toString(16)}`,
     ]);
-    return p ? BigInt(p.toString()) : BigInt('3000000000000000000');
+    return p ? BigInt(p.toString()) : BigInt("3000000000000000000");
   }
 
   /**
@@ -62,7 +62,7 @@ export default class MRXtoUSDOracle extends MetrixContract {
     startIndex: bigint,
     chunkSize: bigint
   ): Promise<[value: bigint, blockNumber: bigint, timestamp: bigint][]> {
-    const prices = await this.call('priceHistory(uint256,uint16)', [
+    const prices = await this.call("priceHistory(uint256,uint16)", [
       `0x${startIndex.toString(16)}`,
       `0x${chunkSize.toString(16)}`,
     ]);
@@ -88,7 +88,7 @@ export default class MRXtoUSDOracle extends MetrixContract {
    * @returns {Promise<bigint>}
    */
   async priceIndex(): Promise<bigint> {
-    const u = await this.call('priceIndex()', []);
+    const u = await this.call("priceIndex()", []);
     return u ? BigInt(u.toString()) : BigInt(0);
   }
 
@@ -99,7 +99,7 @@ export default class MRXtoUSDOracle extends MetrixContract {
   async recentPriceHistory(): Promise<
     [value: bigint, blockNumber: bigint, timestamp: bigint][]
   > {
-    const prices = await this.call('recentPriceHistory()', []);
+    const prices = await this.call("recentPriceHistory()", []);
     const history: [value: bigint, blockNumber: bigint, timestamp: bigint][] =
       [];
     if (prices && prices.length > 0) {
@@ -122,7 +122,7 @@ export default class MRXtoUSDOracle extends MetrixContract {
    * @returns {Promise<Transaction>} an array of TransactionReceipt objects
    */
   async renounceOwnership(): Promise<Transaction> {
-    const tx = await this.send('renounceOwnership()', []);
+    const tx = await this.send("renounceOwnership()", []);
     const getReceipts = this.provider.getTxReceipts(tx, this.abi, this.address);
     return {
       txid: tx.txid,
@@ -136,7 +136,7 @@ export default class MRXtoUSDOracle extends MetrixContract {
    * @returns {Promise<Transaction>} an array of TransactionReceipt objects
    */
   async setAveragePricing(price: bigint): Promise<Transaction> {
-    const tx = await this.send('setAveragePricing(uint256)', [
+    const tx = await this.send("setAveragePricing(uint256)", [
       `0x${price.toString(16)}`,
     ]);
     const getReceipts = this.provider.getTxReceipts(tx, this.abi, this.address);
@@ -156,7 +156,7 @@ export default class MRXtoUSDOracle extends MetrixContract {
     controller: string,
     isController: boolean
   ): Promise<Transaction> {
-    const tx = await this.send('setController(address,bool)', [
+    const tx = await this.send("setController(address,bool)", [
       controller,
       isController,
     ]);
@@ -173,7 +173,7 @@ export default class MRXtoUSDOracle extends MetrixContract {
    * @returns {Promise<Transaction>} an array of TransactionReceipt objects
    */
   async setPrice(price: bigint): Promise<Transaction> {
-    const tx = await this.send('setPrice(uint256)', [
+    const tx = await this.send("setPrice(uint256)", [
       `0x${price.toString(16)}`,
     ]);
     const getReceipts = this.provider.getTxReceipts(tx, this.abi, this.address);
@@ -189,7 +189,7 @@ export default class MRXtoUSDOracle extends MetrixContract {
    * @returns {Promise<Transaction>} an array of TransactionReceipt objects
    */
   async transferOwnership(address: string): Promise<Transaction> {
-    const tx = await this.send('transferOwnership(address)', [address]);
+    const tx = await this.send("transferOwnership(address)", [address]);
     const getReceipts = this.provider.getTxReceipts(tx, this.abi, this.address);
     return {
       txid: tx.txid,
@@ -202,7 +202,7 @@ export default class MRXtoUSDOracle extends MetrixContract {
    * @returns {Promise<bigint>}
    */
   async updated(): Promise<bigint> {
-    const u = await this.call('updated()', []);
+    const u = await this.call("updated()", []);
     return u ? BigInt(u.toString()) : BigInt(0);
   }
 
@@ -211,7 +211,7 @@ export default class MRXtoUSDOracle extends MetrixContract {
    * @returns {Promise<bigint>}
    */
   async value(): Promise<bigint> {
-    const v = await this.call('value()', []);
+    const v = await this.call("value()", []);
     return v ? BigInt(v.toString()) : BigInt(0);
   }
 }

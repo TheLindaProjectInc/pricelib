@@ -1,6 +1,6 @@
 {
   "name": "@metrixnames/pricelib",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A library for fetching the MRX to USD price based on the MNS price oracle",
   "repository": "TheLindaProjectInc/pricelib",
   "source": "src/index.ts",
@@ -28,7 +28,7 @@
   "author": "SeqSEE",
   "license": "MIT",
   "dependencies": {
-    "@metrixcoin/metrilib": "^1.5.21-beta",
+    "@metrixcoin/metrilib": "^1.6.0-beta",
     "axios": "^1.4.0",
     "ethers": "^6.3.0"
   },
