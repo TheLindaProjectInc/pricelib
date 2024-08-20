@@ -7,30 +7,30 @@ import { Version } from "./types/Version";
 const getPriceOracle = (
   network: NetworkType,
   provider: Provider,
-  version: Version | undefined = "latest"
+  version: Version | undefined = "latest",
 ) => {
   if (
     CONTRACTS[version][network].MRXtoUSDOracle === ZeroAddress.replace("0x", "")
   ) {
     throw new Error(
-      `No deployment found for version '${version}' on the ${network}`
+      `No deployment found for version '${version}' on the ${network}`,
     );
   }
   return new MRXtoUSDOracle(
     CONTRACTS[version][network].MRXtoUSDOracle,
-    provider
+    provider,
   );
 };
 
 const getPriceOracleAddress = (
   network: NetworkType,
-  version: Version | undefined = "latest"
+  version: Version | undefined = "latest",
 ) => {
   if (
     CONTRACTS[version][network].MRXtoUSDOracle === ZeroAddress.replace("0x", "")
   ) {
     throw new Error(
-      `No deployment found for version '${version}' on the ${network}`
+      `No deployment found for version '${version}' on the ${network}`,
     );
   }
   return CONTRACTS[version][network].MRXtoUSDOracle;

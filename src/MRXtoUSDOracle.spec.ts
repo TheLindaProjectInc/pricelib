@@ -30,7 +30,7 @@ describe("MRXtoUSDOracle tests", () => {
     if (index >= 7 * 24) {
       history = await oracle.priceHistory(
         index - BigInt(7 * 24),
-        BigInt(7 * 24)
+        BigInt(7 * 24),
       );
     } else {
       history = await oracle.priceHistory(BigInt(0), index + BigInt(1));
@@ -38,8 +38,8 @@ describe("MRXtoUSDOracle tests", () => {
     console.log(
       JSON.stringify(
         history,
-        (key, value) => (typeof value === "bigint" ? value.toString() : value) // return everything else unchanged
-      )
+        (key, value) => (typeof value === "bigint" ? value.toString() : value), // return everything else unchanged
+      ),
     );
     notEqual(history.length, 0);
   }).timeout(60000);

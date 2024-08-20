@@ -60,7 +60,7 @@ export default class MRXtoUSDOracle extends MetrixContract {
    */
   async priceHistory(
     startIndex: bigint,
-    chunkSize: bigint
+    chunkSize: bigint,
   ): Promise<[value: bigint, blockNumber: bigint, timestamp: bigint][]> {
     const prices = await this.call("priceHistory(uint256,uint16)", [
       `0x${startIndex.toString(16)}`,
@@ -154,7 +154,7 @@ export default class MRXtoUSDOracle extends MetrixContract {
    */
   async setController(
     controller: string,
-    isController: boolean
+    isController: boolean,
   ): Promise<Transaction> {
     const tx = await this.send("setController(address,bool)", [
       controller,
